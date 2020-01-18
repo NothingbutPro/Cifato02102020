@@ -166,13 +166,26 @@ public class SplashActivity extends AppCompatActivity {
 
         if (sessionManagement.isLoggedIn()) {
 //               sessionManagement.checkLogin();
-            Intent startmain = new Intent(SplashActivity.this, Ask_Area_Activity.class);
-            startActivity(startmain);
-            finish();
+
+            if(sessionManagement.getTrainNo(this).equals("")) {
+                Intent startmain = new Intent(SplashActivity.this, Ask_Area_Activity.class);
+                startActivity(startmain);
+                finish();
+            }else {
+                Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(startmain);
+                finish();
+            }
         } else {
-            Intent startmain = new Intent(SplashActivity.this, Ask_Area_Activity.class);
-            startActivity(startmain);
-            finish();
+            if(sessionManagement.getTrainNo(this).equals("")) {
+                Intent startmain = new Intent(SplashActivity.this, Ask_Area_Activity.class);
+                startActivity(startmain);
+                finish();
+            }else {
+                Intent startmain = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(startmain);
+                finish();
+            }
         }
 
 

@@ -52,6 +52,7 @@ import com.ics.cifatofoody.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
 import util.RecyclerTouchListener;
+import util.Session_management;
 
 import static com.ics.cifatofoody.Ask_Area_Activity.selected_area_id;
 
@@ -246,6 +247,7 @@ public class Home_fragment extends Fragment {
             isSubcat = true;
         }else {
             params.put("parent", parent_id);
+            selected_area_id = new Session_management(getActivity()).getTrainNo(getActivity());
             params.put("location_id", selected_area_id);
             isSubcat = true;
         }

@@ -36,12 +36,14 @@ import Model.City_Data_Datas;
 import com.ics.cifatofoody.R;
 import util.ConnectivityReceiver;
 import util.CustomVolleyJsonRequest;
+import util.Session_management;
 
 public class Ask_Area_Activity extends AppCompatActivity {
     Spinner area_spin;
     EditText city_search_edt;
     Button selec_area_btn;
     private SliderLayout ask_img_slider;
+    Session_management session_management;
     ArrayList<City_Data_Datas>category_modelList  = new ArrayList<>();
     public static String selected_area_id;
     @Override
@@ -51,6 +53,7 @@ public class Ask_Area_Activity extends AppCompatActivity {
         area_spin = findViewById(R.id.area_spin);
         city_search_edt = findViewById(R.id.city_search_edt);
         selec_area_btn = findViewById(R.id.selec_area_btn);
+        session_management = new Session_management(this);
 //        ask_img_slider = findViewById(R.id.ask_img_slider);
         // initialize a SliderLayout
 //        ask_img_slider.setPresetTransformer(SliderLayout.Transformer.Accordion);
@@ -126,6 +129,7 @@ public class Ask_Area_Activity extends AppCompatActivity {
                                 if(area_spin.getSelectedItemPosition() !=0) {
                                     Intent intent = new Intent(Ask_Area_Activity.this, MainActivity.class);
                                     selected_area_id = category_modelList.get(area_spin.getSelectedItemPosition()-1).getId();
+                                    session_management.setTrainNo(Ask_Area_Activity.this ,selected_area_id);
                                     startActivity(intent);
                                 }else {
                                     Toast.makeText(Ask_Area_Activity.this, "Please select Area", Toast.LENGTH_SHORT).show();
