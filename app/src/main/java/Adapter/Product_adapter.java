@@ -151,7 +151,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                     if (maps.get("parent").equals(decription_models.get(0).getParent()))
                     {
 //                        Toast.makeText(context, "they are "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, "sorryyyyyyyyyyy", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "sorryyyyyyyyyyy", Toast.LENGTH_SHORT).show();
                                         HashMap<String, String> map2 = new HashMap<>();
 
                     map2.put("product_id", modelList.get(position).getProduct_id());

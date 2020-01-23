@@ -112,7 +112,7 @@ public class BaseURL {
 
     //   public static final String BASEURL2 = "https://rightchoiceretail.com/";
 
-//    public static final String BASEURL2 = "http://cifato.com/cifato_store";
+//    public static final String BASEURL2 = "http://cifato.com/cifato_store/";
     public static final String BASEURL2 = "http://cifato.com/cifato/";
 //    public static final String BASEURL2 = "http://cifato.com/cifato_demo";
 //Replacing  cifato_store  By cifato_demo
@@ -171,7 +171,7 @@ public class BaseURL {
 
      public static final String IMG_PROFILE = BASEURL2 + "uploads/profile/";
 
-    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "/index.php/api/get_limit_settings";
+    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "index.php/api/get_limit_settings";
 
     public static final String IMG_SLIDER_URL = BASEURL2 + "uploads/sliders/";
 
@@ -181,42 +181,43 @@ public class BaseURL {
 
     public static final String GET_CATEGORY_URL = BASEURL2 + "index.php/Api/get_categories";
 
-    public static final String GET_SLIDER_URL = "http://cifato.com/cifato_store/index.php/Api/get_sliders";
+//    public static final String GET_SLIDER_URL = "http://cifato.com/cifato_store/index.php/Api/get_sliders";
+    public static final String GET_SLIDER_URL = "http://cifato.com/cifato/index.php/Api/get_sliders";
 
-    public static final String GET_SUPPORT_URL = "http://cifato.com/cifato_store/index.php/Api/support";
+    public static final String GET_SUPPORT_URL = "http://cifato.com/cifato/index.php/Api/support";
 
-    public static final String GET_ABOUT_URL = "http://cifato.com/cifato_store/index.php/Api/aboutus";
+    public static final String GET_ABOUT_URL = "http://cifato.com/cifato/index.php/Api/aboutus";
 
-    public static final String GET_TERMS_URL = "http://cifato.com/cifato_store/index.php/Api/terms";
+    public static final String GET_TERMS_URL = "http://cifato.com/cifato/index.php/Api/terms";
 
     public static final String GET_PRODUCT_URL = BASEURL2 + "index.php/Api/get_products";
 
-    public static final String GET_TIME_SLOT = BASEURL2 + "cifato_store/index.php/Api/get_time_slot";
+    public static final String GET_TIME_SLOT = BASEURL2 + "index.php/Api/get_time_slot";
 
-    public static final String GET_SOCITY = BASEURL2 + "cifato_store/index.php/Api/get_society";
+    public static final String GET_SOCITY = BASEURL2 + "index.php/Api/get_society";
 
-    public static final String ADD_ADDRESS = BASEURL2 + "cifato_store/index.php/Api/add_address";
+    public static final String ADD_ADDRESS = BASEURL2 + "index.php/Api/add_address";
 
-    public static final String GET_ADDRESS = BASEURL2 + "cifato_store/index.php/Api/get_address";
+    public static final String GET_ADDRESS = BASEURL2 + "index.php/Api/get_address";
 
-    public static final String EDIT_ADDRESS = BASEURL2 + "cifato_store/index.php/Api/edit_address";
+    public static final String EDIT_ADDRESS = BASEURL2 + "index.php/Api/edit_address";
 
-    public static final String EDIT_PROFILE = BASEURL2 + "cifato_store/index.php/Api/update_userdata";
+    public static final String EDIT_PROFILE = BASEURL2 + "index.php/Api/update_userdata";
 
-    public static final String ADD_ORDER = BASEURL2 + "cifato_store/index.php/Api/send_order";
+    public static final String ADD_ORDER = BASEURL2 + "index.php/Api/send_order";
 
-    public static final String GET_ORDER = BASEURL2 + "cifato_store/index.php/Api/my_orders";
+    public static final String GET_ORDER = BASEURL2 + "index.php/Api/my_orders";
 
-    public static final String ORDER_DETAIL = BASEURL2 + "cifato_store/index.php/Api/order_details";
+    public static final String ORDER_DETAIL = BASEURL2 + "index.php/Api/order_details";
 
-    public static final String ORDER_CONFIRM = BASEURL2 + "cifato_store/index.php/Api/delivered_order";
+    public static final String ORDER_CONFIRM = BASEURL2 + "index.php/Api/delivered_order";
 
-    public static final String DELETE_ORDER = BASEURL2 + "cifato_store/index.php/Api/cancel_order";
+    public static final String DELETE_ORDER = BASEURL2 + "index.php/Api/cancel_order";
 
-    public static final String RIGISTER_FCM = BASEURL2 + "cifato_store/index.php/Api/register_fcm";
+    public static final String RIGISTER_FCM = BASEURL2 + "index.php/Api/register_fcm";
 
-    public static final String CHANGE_PASSWORD = BASEURL2 + "cifato_store/index.php/Api/change_password";
+    public static final String CHANGE_PASSWORD = BASEURL2 + "index.php/Api/change_password";
 
-    public static final String DELETE_ADDRESS = BASEURL2 + "cifato_store/index.php/Api/delete_address";
+    public static final String DELETE_ADDRESS = BASEURL2 + "index.php/Api/delete_address";
 
 }
