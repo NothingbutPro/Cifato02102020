@@ -61,9 +61,7 @@ import util.Session_management;
 
 
 public class Product_fragment extends Fragment {
-
     private static String TAG = Product_fragment.class.getSimpleName();
-
     private RecyclerView rv_cat;
     private TabLayout tab_cat;
     private ImageView header;
@@ -71,10 +69,7 @@ public class Product_fragment extends Fragment {
     private TextView description;
     private TextView rating;
     private List<Category_model> category_modelList = new ArrayList<>();
-
     private List<String> cat_menu_id = new ArrayList<>();
-
-
     private List<Product_model> product_modelList = new ArrayList<>();
     private List<Decription_model> decription_models = new ArrayList<>();
     private Product_adapter adapter_product;
@@ -292,14 +287,18 @@ public class Product_fragment extends Fragment {
 
                         product_modelList = gson.fromJson(response.getString("data"), listType);
                         for (Product_model model : product_modelList) {
+//                            Log.e("")
                             in_Stock = model.getIn_stock();
                         }
                         decription_models = gson.fromJson(response.getString("des"), listType2);
+
                         for (Decription_model model : decription_models) {
                             img = model.getImage();
                             descrp = model.getDescription();
                             Rating = model.getRatting();
+                          String  parent = model.getParent();
                             Log.e("IMAGESSS", img);
+                            Log.e("parent", parent);
                         }
                         Glide.with(getActivity().getApplicationContext())
                                 .load(BaseURL.IMG_CATEGORY_URL + img)

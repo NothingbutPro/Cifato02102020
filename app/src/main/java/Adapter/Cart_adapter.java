@@ -73,7 +73,6 @@ public class Cart_adapter extends RecyclerView.Adapter<Cart_adapter.ProductHolde
     public void onBindViewHolder(final ProductHolder holder, final int position) {
         map = list.get(position);
 
-
         Glide.with(activity)
                 .load(BaseURL.IMG_PRODUCT_URL + map.get("product_image"))
                 .centerCrop()

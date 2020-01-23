@@ -1,7 +1,5 @@
 package Model;
 
-
-
 public class Product_model {
 
     String product_id;
@@ -16,10 +14,13 @@ public class Product_model {
     String increament;
     String title;
     String Mrp;
-
+    String parent;
 
     public String getProduct_id() {
         return product_id;
+    }
+   public String getParent() {
+        return parent;
     }
 
     public String getProduct_name() {

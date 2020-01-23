@@ -112,7 +112,8 @@ public class BaseURL {
 
     //   public static final String BASEURL2 = "https://rightchoiceretail.com/";
 
-    public static final String BASEURL2 = "http://cifato.com/";
+//    public static final String BASEURL2 = "http://cifato.com/cifato_store";
+    public static final String BASEURL2 = "http://cifato.com/cifato/";
 //    public static final String BASEURL2 = "http://cifato.com/cifato_demo";
 //Replacing  cifato_store  By cifato_demo
    /* public static final String IMG_PROFILE = BASEURL2 + "uploads/profile/";
@@ -170,15 +171,15 @@ public class BaseURL {
 
      public static final String IMG_PROFILE = BASEURL2 + "uploads/profile/";
 
-    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "cifato_store/index.php/api/get_limit_settings";
+    public static final String GET_LIMITE_SETTING_URL = BASEURL2 + "/index.php/api/get_limit_settings";
 
-    public static final String IMG_SLIDER_URL = BASEURL2 + "cifato_store/uploads/sliders/";
+    public static final String IMG_SLIDER_URL = BASEURL2 + "uploads/sliders/";
 
-    public static final String IMG_CATEGORY_URL = BASEURL2 + "cifato_store/uploads/category/";
+    public static final String IMG_CATEGORY_URL = BASEURL2 + "uploads/category/";
 
-    public static final String IMG_PRODUCT_URL = BASEURL2 + "cifato_store/uploads/products/";
+    public static final String IMG_PRODUCT_URL = BASEURL2 + "uploads/products/";
 
-    public static final String GET_CATEGORY_URL = BASEURL2 + "cifato_store/index.php/Api/get_categories";
+    public static final String GET_CATEGORY_URL = BASEURL2 + "index.php/Api/get_categories";
 
     public static final String GET_SLIDER_URL = "http://cifato.com/cifato_store/index.php/Api/get_sliders";
 
@@ -188,7 +189,7 @@ public class BaseURL {
 
     public static final String GET_TERMS_URL = "http://cifato.com/cifato_store/index.php/Api/terms";
 
-    public static final String GET_PRODUCT_URL = BASEURL2 + "cifato_store/index.php/Api/get_products";
+    public static final String GET_PRODUCT_URL = BASEURL2 + "index.php/Api/get_products";
 
     public static final String GET_TIME_SLOT = BASEURL2 + "cifato_store/index.php/Api/get_time_slot";
 

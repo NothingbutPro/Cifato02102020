@@ -3,8 +3,10 @@ package Adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,13 +106,13 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //                HashMap<String, String> maps =new HashMap<>();
                 if (dbcart.getCartCount() == 0)
                 {
-
                     Toast.makeText(context, "They are equal", Toast.LENGTH_SHORT).show();
                     map.put("product_id", modelList.get(position).getProduct_id());
                     map.put("category_id", modelList.get(position).getCategory_id());
                     map.put("product_image", modelList.get(position).getProduct_image());
                     map.put("increament", modelList.get(position).getIncreament());
                     map.put("product_name", modelList.get(position).getProduct_name());
+                    map.put("parent", decription_models.get(0).getParent());
                     map.put("price", modelList.get(position).getPrice());
                     map.put("stock", modelList.get(position).getIn_stock());
                     map.put("title", modelList.get(position).getTitle());
@@ -141,49 +143,192 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                     ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
 
                 }
-                for(int i=0;i<dbcart.getCartCount(); i++) {
-                    if(dbcart.getCartAll().get(i).get("category_id").equals(modelList.get(position).getCategory_id()))
+                else
+                {
+                    Log.e("prent" , "wziata"+dbcart.isRestaurantInCart(map.get("parent")));
+                for(int i=0;i<dbcart.getCartCount();i++) {
+                    HashMap<String, String> maps = dbcart.getCartAll().get(i);
+                    if (maps.get("parent").equals(decription_models.get(0).getParent()))
                     {
-                        Toast.makeText(context, "They are equal", Toast.LENGTH_SHORT).show();
-                        map.put("product_id", modelList.get(position).getProduct_id());
-                        map.put("category_id", modelList.get(position).getCategory_id());
-                        map.put("product_image", modelList.get(position).getProduct_image());
-                        map.put("increament", modelList.get(position).getIncreament());
-                        map.put("product_name", modelList.get(position).getProduct_name());
-                        map.put("price", modelList.get(position).getPrice());
-                        map.put("stock", modelList.get(position).getIn_stock());
-                        map.put("title", modelList.get(position).getTitle());
-                        map.put("unit", modelList.get(position).getUnit());
-                        map.put("Mrp", modelList.get(position).getMrp());
-                        map.put("unit_value", modelList.get(position).getUnit_value());
+//                        Toast.makeText(context, "they are "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "sorryyyyyyyyyyy", Toast.LENGTH_SHORT).show();
+                                        HashMap<String, String> map2 = new HashMap<>();
 
-                        if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+                    map2.put("product_id", modelList.get(position).getProduct_id());
+                    map2.put("category_id", modelList.get(position).getCategory_id());
+                    map2.put("product_image", modelList.get(position).getProduct_image());
+                    map2.put("increament", modelList.get(position).getIncreament());
+                    map2.put("product_name", modelList.get(position).getProduct_name());
+                    map2.put("parent", decription_models.get(0).getParent());
+                    map2.put("price", modelList.get(position).getPrice());
+                    map2.put("stock", modelList.get(position).getIn_stock());
+                    map2.put("title", modelList.get(position).getTitle());
+                    map2.put("unit", modelList.get(position).getUnit());
 
-                            if (dbcart.isInCart(map.get("product_id"))) {
-                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                            } else {
-                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                            }
-                        } else {
-                            dbcart.removeItemFromCart(map.get("product_id"));
+                    map2.put("unit_value", modelList.get(position).getUnit_value());
+
+                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+                    String my_product = map2.get("product_id");
+                    Log.e("my product" , ""+my_product);
+                    if (dbcart.isInCart(map2.get("product_id"))) {
+                        dbcart.setRestuarentCart(map2, Float.valueOf(tv_contetiy.getText().toString()));
+                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                    } else {
+                        dbcart.setRestuarentCart(map2, Float.valueOf(tv_contetiy.getText().toString()));
+                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+                    }
+                } else {
+//                    dbcart.removeItemFromCart(map2.get("product_id"));
 //                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-                            tv_add.setText("Add To Card");
-                        }
+//                    tv_add.setText("Add To Card");
+                }
 
-                        Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
-                        Double price = Double.parseDouble(map.get("price"));
+                Double items = Double.parseDouble(dbcart.getInCartItemQty(map2.get("product_id")));
+                Double price = Double.parseDouble(map2.get("price"));
 
-                        tv_total.setText("" + price * items);
-//                mrpPrice.setText(map.get("Mrp"));
-                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+
+                notifyItemChanged(position);
                     }else {
-                        ShowDialogForClearCart(position,map,tv_contetiy,tv_total,tv_add);
-                        i=dbcart.getCartCount();
-                        Toast.makeText(context, "They are not equal", Toast.LENGTH_SHORT).show();
+
+                        ShowDialogForClearCart(position, maps, tv_contetiy, tv_total, tv_add);
+                        i = dbcart.getCartCount() +1;
+                        Toast.makeText(context, "done", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, "they are not "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
                     }
                 }
+//                HashMap<String, String> map2 = new HashMap<>();
+//
+//                    map2.put("product_id", modelList.get(position).getProduct_id());
+//                    map2.put("category_id", modelList.get(position).getCategory_id());
+//                    map2.put("product_image", modelList.get(position).getProduct_image());
+//                    map2.put("increament", modelList.get(position).getIncreament());
+//                    map2.put("product_name", modelList.get(position).getProduct_name());
+//
+//                    map2.put("price", modelList.get(position).getPrice());
+//                    map2.put("stock", modelList.get(position).getIn_stock());
+//                    map2.put("title", modelList.get(position).getTitle());
+//                    map2.put("unit", modelList.get(position).getUnit());
+//
+//                    map2.put("unit_value", modelList.get(position).getUnit_value());
+//
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                    if (dbcart.isInCart(map2.get("product_id"))) {
+//                        dbcart.setCart(map2, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    } else {
+//                        dbcart.setCart(map2, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    }
+//                } else {
+//                    dbcart.removeItemFromCart(map2.get("product_id"));
+////                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                    tv_add.setText("Add To Card");
+//                }
+//
+//                Double items = Double.parseDouble(dbcart.getInCartItemQty(map2.get("product_id")));
+//                Double price = Double.parseDouble(map2.get("price"));
+//
+//                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                notifyItemChanged(position);
+
+            }
+//                if(!dbcart.getCartAll().isEmpty()) {
+//                        Toast.makeText(context, "Adding this item", Toast.LENGTH_SHORT).show();
+//                        map.put("product_id", modelList.get(position).getProduct_id());
+//                        map.put("category_id", modelList.get(position).getCategory_id());
+//                        map.put("product_image", modelList.get(position).getProduct_image());
+//                        map.put("increament", modelList.get(position).getIncreament());
+//                        map.put("product_name", modelList.get(position).getProduct_name());
+//                        map.put("parent", decription_models.get(0).getParent());
+//                        map.put("price", modelList.get(position).getPrice());
+//                        map.put("stock", modelList.get(position).getIn_stock());
+//                        map.put("title", modelList.get(position).getTitle());
+//                        map.put("unit", modelList.get(position).getUnit());
+//                        map.put("Mrp", modelList.get(position).getMrp());
+//                        map.put("unit_value", modelList.get(position).getUnit_value());
+//
+//                        if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                            if (dbcart.isInCart(map.get("product_id"))) {
+//                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                            } else {
+//                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                            }
+//                        } else {
+//                            dbcart.removeItemFromCart(map.get("product_id"));
+////                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                            tv_add.setText("Add To Card");
+//                        }
+//
+//                        Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
+//                        Double price = Double.parseDouble(map.get("price"));
+//
+//                        tv_total.setText("" + price * items);
+////                mrpPrice.setText(map.get("Mrp"));
+//                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                    }else {
+//                        Toast.makeText(context, "Sorry you can not add this item", Toast.LENGTH_SHORT).show();
+//                    }
+//                else {
+//                for(int i=0;i<dbcart.getCartCount(); i++) {
+//                    String dbvalue = dbcart.getCartAll().get(i).get("parent");
+//                    String desvalue = decription_models.get(0).getParent();
+//                    if (dbcart.getCartAll().get(i).get("parent").equals(decription_models.get(0).getParent())) {
+//                        Toast.makeText(context, "They are equal", Toast.LENGTH_SHORT).show();
+//                        map.put("product_id", modelList.get(position).getProduct_id());
+//                        map.put("category_id", modelList.get(position).getCategory_id());
+//                        map.put("product_image", modelList.get(position).getProduct_image());
+//                        map.put("increament", modelList.get(position).getIncreament());
+//                        map.put("parent", modelList.get(position).getParent());
+//                        map.put("product_name", modelList.get(position).getProduct_name());
+//                        map.put("price", modelList.get(position).getPrice());
+//                        map.put("stock", modelList.get(position).getIn_stock());
+//                        map.put("title", modelList.get(position).getTitle());
+//                        map.put("unit", modelList.get(position).getUnit());
+//                        map.put("Mrp", modelList.get(position).getMrp());
+//                        map.put("unit_value", modelList.get(position).getUnit_value());
+//
+//                        if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                            if (dbcart.isInCart(map.get("product_id"))) {
+//                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                            } else {
+//                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                            }
+////                            if (dbcart.isInCart(map.get("product_id"))) {
+////                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+////                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+////                            } else {
+////                                dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+////                                tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+////                            }
+//                        } else {
+//                            dbcart.removeItemFromCart(map.get("product_id"));
+////                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                            tv_add.setText("Add To Card");
+//                        }
+//
+//                        Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
+//                        Double price = Double.parseDouble(map.get("price"));
+//
+//                        tv_total.setText("" + price * items);
+////                mrpPrice.setText(map.get("Mrp"));
+//                        ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//                    } else {
+//                        ShowDialogForClearCart(position, map, tv_contetiy, tv_total, tv_add);
+//                        i = dbcart.getCartCount();
+//                        Toast.makeText(context, "They are not equal", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                }
 
 
             } else if (id == R.id.iv_subcat_img) {
@@ -206,7 +351,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
 //        colorSelectionView.setSelectedColor(DEFAULT_BACKGROUND_COLOR);
         alertDialog = new CFAlertDialog.Builder(context)
                 .setCancelable(true)
-                .setTitle("We Are unable to add items in cart")
+                .setTitle("We are unable to add items in cart")
                 .setMessage("Sorry,but you already have some items from others so we are unable to add from "+modelList.get(position).getTitle())
                 .addButton("Clear Card and Add",-1, -1, CFAlertDialog.CFAlertActionStyle.POSITIVE, CFAlertDialog.CFAlertActionAlignment.JUSTIFIED, new DialogInterface.OnClickListener() {
                     @Override
@@ -220,6 +365,7 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
                             map.put("product_image", modelList.get(position).getProduct_image());
                             map.put("increament", modelList.get(position).getIncreament());
                             map.put("product_name", modelList.get(position).getProduct_name());
+                            map.put("parent", decription_models.get(0).getParent());
                             map.put("price", modelList.get(position).getPrice());
                             map.put("stock", modelList.get(position).getIn_stock());
                             map.put("title", modelList.get(position).getTitle());
@@ -436,59 +582,59 @@ public class Product_adapter extends RecyclerView.Adapter<Product_adapter.MyView
             tv_add.setText("Add To Card");
         }
 
-        tv_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                for(int i=0;i<dbcart.getCartCount();i++) {
-                    HashMap<String, String> maps = dbcart.getCartAll().get(i);
-                    if (maps.get("category_id").equals(modelList.get(position).getCategory_id()))
-                    {
-                        Toast.makeText(context, "they are "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
-                    }else {
-//                        ghgh
-//                        ShowDialogForClearCart(position);
-                        Toast.makeText(context, "they are not "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put("product_id", modelList.get(position).getProduct_id());
-                map.put("category_id", modelList.get(position).getCategory_id());
-                map.put("product_image", modelList.get(position).getProduct_image());
-                map.put("increament", modelList.get(position).getIncreament());
-                map.put("product_name", modelList.get(position).getProduct_name());
-
-                map.put("price", modelList.get(position).getPrice());
-                map.put("stock", modelList.get(position).getIn_stock());
-                map.put("title", modelList.get(position).getTitle());
-                map.put("unit", modelList.get(position).getUnit());
-
-                map.put("unit_value", modelList.get(position).getUnit_value());
-
-                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
-
-                    if (dbcart.isInCart(map.get("product_id"))) {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                    } else {
-                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
-                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
-                    }
-                } else {
-                    dbcart.removeItemFromCart(map.get("product_id"));
-//                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
-                    tv_add.setText("Add To Card");
-                }
-
-                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
-                Double price = Double.parseDouble(map.get("price"));
-
-                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
-
-                notifyItemChanged(position);
-
-            }
-        });
+//        tv_add.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                for(int i=0;i<dbcart.getCartCount();i++) {
+//                    HashMap<String, String> maps = dbcart.getCartAll().get(i);
+//                    if (maps.get("category_id").equals(modelList.get(position).getCategory_id()))
+//                    {
+//                        Toast.makeText(context, "they are "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
+//                    }else {
+////                        ghgh
+////                        ShowDialogForClearCart(position);
+//                        Toast.makeText(context, "they are not "+modelList.get(position).getCategory_id(), Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                HashMap<String, String> map = new HashMap<>();
+//
+//                map.put("product_id", modelList.get(position).getProduct_id());
+//                map.put("category_id", modelList.get(position).getCategory_id());
+//                map.put("product_image", modelList.get(position).getProduct_image());
+//                map.put("increament", modelList.get(position).getIncreament());
+//                map.put("product_name", modelList.get(position).getProduct_name());
+//
+//                map.put("price", modelList.get(position).getPrice());
+//                map.put("stock", modelList.get(position).getIn_stock());
+//                map.put("title", modelList.get(position).getTitle());
+//                map.put("unit", modelList.get(position).getUnit());
+//
+//                map.put("unit_value", modelList.get(position).getUnit_value());
+//
+//                if (!tv_contetiy.getText().toString().equalsIgnoreCase("0")) {
+//
+//                    if (dbcart.isInCart(map.get("product_id"))) {
+//                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    } else {
+//                        dbcart.setCart(map, Float.valueOf(tv_contetiy.getText().toString()));
+//                        tv_add.setText(context.getResources().getString(R.string.tv_pro_update));
+//                    }
+//                } else {
+//                    dbcart.removeItemFromCart(map.get("product_id"));
+////                    tv_add.setText(context.getResources().getString(R.string.tv_pro_add));
+//                    tv_add.setText("Add To Card");
+//                }
+//
+//                Double items = Double.parseDouble(dbcart.getInCartItemQty(map.get("product_id")));
+//                Double price = Double.parseDouble(map.get("price"));
+//
+//                ((MainActivity) context).setCartCounter("" + dbcart.getCartCount());
+//
+//                notifyItemChanged(position);
+//
+//            }
+//        });
 
         iv_plus.setOnClickListener(new View.OnClickListener() {
             @Override

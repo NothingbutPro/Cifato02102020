@@ -251,7 +251,7 @@ public class Home_fragment extends Fragment {
             params.put("location_id", selected_area_id);
             isSubcat = true;
         }
-
+        Log.e("url ", "GET_CATEGORY_URL"+ BaseURL.GET_CATEGORY_URL);
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
                 BaseURL.GET_CATEGORY_URL, params, new Response.Listener<JSONObject>() {
 

@@ -41,7 +41,7 @@
 
             <TextView
                 android:id="@+id/tv_subcat_title"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
@@ -145,11 +145,9 @@
             android:id="@+id/iv_subcat_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/space_8"
             android:layout_marginRight="@dimen/space_8"
             app:layout_constraintBottom_toBottomOf="@+id/iv_subcat_plus"
             app:layout_constraintRight_toLeftOf="@+id/tv_subcat_contetiy"
-            app:layout_constraintTop_toTopOf="@+id/iv_subcat_plus"
             app:srcCompat="@drawable/ic_less" />
 
         <TextView

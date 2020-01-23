@@ -96,7 +96,7 @@ public class Ask_Area_Activity extends AppCompatActivity {
         Map<String, String> params = new HashMap<String, String>();
 
         CustomVolleyJsonRequest jsonObjReq = new CustomVolleyJsonRequest(Request.Method.POST,
-               "http://cifato.com/cifato_store/api/get_area", params, new Response.Listener<JSONObject>() {
+               "http://cifato.com/cifato/api/get_area", params, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
